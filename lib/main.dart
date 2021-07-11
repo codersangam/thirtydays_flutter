@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:thirtydays_flutter/home_screen.dart';
+import 'package:thirtydays_flutter/screens/home_screen.dart';
+import 'package:thirtydays_flutter/screens/login.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
@@ -10,7 +11,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      // home: HomeScreen(),
+      themeMode: ThemeMode.light,
+      theme: ThemeData(primarySwatch: Colors.deepOrange),
+      darkTheme: ThemeData(brightness: Brightness.dark),
+
+      // initialRoute: "/home",
+      routes: {
+        "/": (context) => LoginScreen(),
+        "/home": (context) => HomeScreen(),
+        "/login": (context) => LoginScreen(),
+      },
     );
   }
 }
