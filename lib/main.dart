@@ -1,28 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:thirtydays_flutter/home_screen.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  int days = 30;
-  String name = "Sangam";
-  bool isMale = true;
-  num temp = 30.5;
-
-  var a = 20;
-  static const pi = 3.14;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Material(
-        child: Center(
-          child: Container(
-            child: Text("Welcome to 30 Days of Flutter"),
-          ),
-        ),
-      ),
+      home: HomeScreen(),
     );
   }
 }
