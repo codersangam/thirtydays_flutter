@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:thirtydays_flutter/utils/routes.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String name = "";
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -17,7 +23,7 @@ class LoginScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 Text(
-                  "Welcome!",
+                  "Welcome! $name",
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -32,6 +38,10 @@ class LoginScreen extends StatelessWidget {
                             hintText: "Enter Username",
                             labelText: "Username or email",
                             border: OutlineInputBorder()),
+                        onChanged: (value) {
+                          name = value;
+                          setState(() {});
+                        },
                       ),
                       SizedBox(
                         height: 10,
