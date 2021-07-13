@@ -10,66 +10,90 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   String name = "";
+  final _formKey = GlobalKey<FormState>();
+  moveToHome(BuildContext context) {
+    {
+      if (_formKey.currentState!.validate()) {
+        Navigator.pushNamed(context, MyRoutes.homeRoute);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
         color: Colors.white,
         child: SingleChildScrollView(
           child: Center(
-            child: Column(
-              children: [
-                Image.asset(
-                  "assets/images/login.png",
-                  fit: BoxFit.cover,
-                ),
-                Text(
-                  "Welcome! $name",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                            hintText: "Enter Username",
-                            labelText: "Username or email",
-                            border: OutlineInputBorder()),
-                        onChanged: (value) {
-                          name = value;
-                          setState(() {});
-                        },
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                            hintText: "Enter Password",
-                            labelText: "Password",
-                            border: OutlineInputBorder()),
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 35,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, MyRoutes.homeRoute);
-                          },
-                          child: Text("Sign in"),
-                        ),
-                      ),
-                    ],
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Image.asset(
+                    "assets/images/login.png",
+                    fit: BoxFit.cover,
                   ),
-                )
-              ],
+                  Text(
+                    "Welcome! $name",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          decoration: InputDecoration(
+                              hintText: "Enter Username",
+                              labelText: "Username or email",
+                              border: OutlineInputBorder()),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Username is required";
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            name = value;
+                            setState(() {});
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                              hintText: "Enter Password",
+                              labelText: "Password",
+                              border: OutlineInputBorder()),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Password is required";
+                            } else if (value.length < 8) {
+                              return "Password length must be greater than 8 characters";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 35,
+                          child: ElevatedButton(
+                            onPressed: () => moveToHome(context),
+                            child: Text("Sign in"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ));
