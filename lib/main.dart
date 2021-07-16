@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:thirtydays_flutter/screens/home_screen.dart';
 import 'package:thirtydays_flutter/screens/login.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:thirtydays_flutter/utils/routes.dart';
+import 'package:thirtydays_flutter/widgets/themes.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
@@ -15,11 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // home: HomeScreen(),
       themeMode: ThemeMode.light,
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        fontFamily: GoogleFonts.lato().fontFamily,
-      ),
-      darkTheme: ThemeData(brightness: Brightness.dark),
+      theme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
 
       initialRoute: MyRoutes.homeRoute,
       routes: {
