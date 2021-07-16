@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:thirtydays_flutter/models/catalog.dart';
 import 'package:thirtydays_flutter/widgets/drawer.dart';
+import 'package:thirtydays_flutter/widgets/items_widget.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
@@ -13,14 +15,20 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dummyList = List.generate(10, (index) => CatalogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
         title: Text("Catalog App"),
       ),
-      body: Center(
-        child: Container(
-          child: Text("Welcome to $days Days of Flutter by $name"),
-        ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView.builder(
+            itemCount: dummyList.length,
+            itemBuilder: (context, index) {
+              return ItemWidget(
+                item: dummyList[index],
+              );
+            }),
       ),
       drawer: MyDrawer(),
     );
