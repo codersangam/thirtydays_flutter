@@ -1,17 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 import 'package:thirtydays_flutter/models/catalog.dart';
 import 'package:thirtydays_flutter/widgets/drawer.dart';
 import 'package:thirtydays_flutter/widgets/items_widget.dart';
 
 // ignore: must_be_immutable
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   int days = 30;
+
   String name = "Sangam";
+
   bool isMale = true;
+
   num temp = 30.5;
 
   var a = 20;
-  // static const pi = 3.14;
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    final stringData = await rootBundle.loadString("assets/files/catalog.json");
+    final decodedData = jsonDecode(stringData);
+    var productsData = decodedData["products"];
+    print(productsData);
+  }
 
   @override
   Widget build(BuildContext context) {
