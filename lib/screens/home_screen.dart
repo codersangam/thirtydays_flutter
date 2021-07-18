@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:thirtydays_flutter/models/catalog.dart';
 import 'package:thirtydays_flutter/widgets/drawer.dart';
-import 'package:thirtydays_flutter/widgets/items_widget.dart';
+// import 'package:thirtydays_flutter/widgets/items_widget.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
@@ -50,13 +50,25 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(16.0),
         // ignore: unnecessary_null_comparison
         child: (CatalogModel.items.isNotEmpty && CatalogModel.items != null)
-            ? ListView.builder(
-                itemCount: CatalogModel.items.length,
+            ? GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 30),
                 itemBuilder: (context, index) {
-                  return ItemWidget(
-                    item: CatalogModel.items[index],
-                  );
-                })
+                  final item = CatalogModel.items[index];
+                  return Card(
+                      clipBehavior: Clip.antiAlias,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                      child: GridTile(
+                        child: Image.network(item.image),
+                        header: Text(item.name),
+                        footer: Text('\$' + item.price.toString()),
+                      ));
+                },
+                itemCount: CatalogModel.items.length,
+              )
             : Center(
                 child: CircularProgressIndicator(),
               ),
