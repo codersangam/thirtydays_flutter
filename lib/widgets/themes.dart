@@ -17,5 +17,5 @@ class MyTheme {
 
   // Colors
 
-  static Color cream = Color(0xfffafafafa);
+  static Color cream = Color(0xfff5f5f5);
 }
