@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thirtydays_flutter/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Colors.white,
+        color: context.canvasColor,
         child: SingleChildScrollView(
           child: Center(
             child: Form(
@@ -46,9 +47,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         TextFormField(
                           decoration: InputDecoration(
-                              hintText: "Enter Username",
-                              labelText: "Username or email",
-                              border: OutlineInputBorder()),
+                            hintText: "Enter Username",
+                            labelText: "Username or email",
+                            border: OutlineInputBorder(),
+                          ),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Username is required";
@@ -85,6 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: double.infinity,
                           height: 35,
                           child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    context.theme.buttonColor)),
                             onPressed: () => moveToHome(context),
                             child: Text("Sign in"),
                           ),
