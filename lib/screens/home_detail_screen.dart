@@ -16,9 +16,9 @@ class HomeDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
       ),
-      backgroundColor: MyTheme.cream,
+      backgroundColor: context.canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           buttonPadding: EdgeInsets.zero,
           alignment: MainAxisAlignment.spaceBetween,
@@ -28,6 +28,8 @@ class HomeDetailsScreen extends StatelessWidget {
               onPressed: () {},
               child: "Add to Cart".text.xl.make(),
               style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(context.theme.buttonColor),
                   shape: MaterialStateProperty.all(StadiumBorder())),
             ).wh(150, 50)
           ],
@@ -47,7 +49,7 @@ class HomeDetailsScreen extends StatelessWidget {
               edge: VxEdge.TOP,
               arcType: VxArcType.CONVEY,
               child: Container(
-                color: Colors.white,
+                color: context.cardColor,
                 width: context.screenWidth,
                 child: SingleChildScrollView(
                   child: Column(
