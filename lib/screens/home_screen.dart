@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {
             Navigator.pushNamed(context, MyRoutes.cartRoute);
           },
-          backgroundColor: context.theme.buttonColor,
+          backgroundColor: context.theme.primaryColor,
           child: Icon(
             CupertinoIcons.cart,
             color: Colors.white,
@@ -65,7 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 CatalogHeader(),
                 // ignore: unnecessary_null_comparison
-                if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+                if (CatalogModel.items != null &&
+                    CatalogModel.items!.isNotEmpty)
                   CatalogList().py16().expand()
                 else
                   Center(

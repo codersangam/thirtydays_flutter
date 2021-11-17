@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: ElevatedButton(
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
-                                    context.theme.buttonColor)),
+                                    context.theme.primaryColor)),
                             onPressed: () => moveToHome(context),
                             child: Text("Sign in"),
                           ),

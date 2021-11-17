@@ -7,22 +7,22 @@ class MyTheme {
       primarySwatch: Colors.red,
       cardColor: Colors.white,
       canvasColor: cream,
-      buttonColor: Colors.red,
-      accentColor: Colors.black,
+      primaryColor: Colors.red,
+      focusColor: Colors.black,
       fontFamily: GoogleFonts.poppins().fontFamily,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.black),
-        textTheme: Theme.of(context).textTheme,
+        // toolbarTextStyle: Theme.of(context).textTheme,
       ));
 
   static ThemeData darkTheme(BuildContext context) => ThemeData(
       brightness: Brightness.dark,
       cardColor: Colors.black,
       canvasColor: darkCream,
-      buttonColor: lightPruple,
-      accentColor: Colors.white,
+      primaryColor: lightPruple,
+      focusColor: Colors.white,
       fontFamily: GoogleFonts.poppins().fontFamily,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,

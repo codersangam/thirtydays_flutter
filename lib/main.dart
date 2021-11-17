@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:thirtydays_flutter/core/my_store.dart';
 import 'package:thirtydays_flutter/screens/cart_screen.dart';
 import 'package:thirtydays_flutter/screens/home_screen.dart';
 import 'package:thirtydays_flutter/screens/login.dart';
 import 'package:thirtydays_flutter/utils/routes.dart';
 import 'package:thirtydays_flutter/widgets/themes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 void main(List<String> args) {
-  runApp(MyApp());
+  runApp(VxState(store: MyStore(), child: MyApp()));
 }
 
 // ignore: must_be_immutable
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
 
       initialRoute: MyRoutes.cartRoute,
       routes: {
-        "/": (context) => LoginScreen(),
+        "/": (context) => HomeScreen(),
         MyRoutes.homeRoute: (context) => HomeScreen(),
         MyRoutes.loginRoute: (context) => LoginScreen(),
         MyRoutes.cartRoute: (context) => CartScreen(),
