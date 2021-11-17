@@ -28,7 +28,7 @@ class HomeDetailsScreen extends StatelessWidget {
               child: "Add to Cart".text.xl.make(),
               style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all(context.theme.buttonColor),
+                      MaterialStateProperty.all(context.theme.primaryColor),
                   shape: MaterialStateProperty.all(StadiumBorder())),
             ).wh(150, 50)
           ],
