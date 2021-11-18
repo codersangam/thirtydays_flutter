@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:thirtydays_flutter/core/my_store.dart';
+import 'package:thirtydays_flutter/models/cart.dart';
 import 'package:thirtydays_flutter/models/catalog.dart';
 import 'package:thirtydays_flutter/utils/routes.dart';
 import 'package:thirtydays_flutter/widgets/home_widgets/catalog_header.dart';
@@ -45,9 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     // final dummyList = List.generate(10, (index) => CatalogModel.items[0]);
+    final _cart = (VxState.store as MyStore).cart;
     return Scaffold(
-        backgroundColor: context.canvasColor,
-        floatingActionButton: FloatingActionButton(
+      backgroundColor: context.canvasColor,
+      floatingActionButton: VxBuilder(
+        mutations: {AddMutation, RemoveMutation},
+        builder: (context, _, status) => FloatingActionButton(
           onPressed: () {
             Navigator.pushNamed(context, MyRoutes.cartRoute);
           },
@@ -56,25 +61,34 @@ class _HomeScreenState extends State<HomeScreen> {
             CupertinoIcons.cart,
             color: Colors.white,
           ),
-        ),
-        body: SafeArea(
-          child: Container(
-            padding: Vx.m32,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CatalogHeader(),
-                // ignore: unnecessary_null_comparison
-                if (CatalogModel.items != null &&
-                    CatalogModel.items!.isNotEmpty)
-                  CatalogList().py16().expand()
-                else
-                  Center(
-                    child: CircularProgressIndicator(),
-                  )
-              ],
-            ),
+        ).badge(
+          color: Vx.black,
+          size: 22.0,
+          count: _cart!.items.length,
+          textStyle: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
-        ));
+        ),
+      ),
+      body: SafeArea(
+        child: Container(
+          padding: Vx.m32,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CatalogHeader(),
+              // ignore: unnecessary_null_comparison
+              if (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
+                CatalogList().py16().expand()
+              else
+                Center(
+                  child: CircularProgressIndicator(),
+                )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
